@@ -9,6 +9,7 @@ import react from '@astrojs/react';
 export default defineConfig({
 
   site: "https://parser06.github.io",
+  base: "/personal-website",
 
   vite: {
     plugins: [tailwindcss()]
