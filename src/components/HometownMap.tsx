@@ -165,21 +165,21 @@ export default function HometownMap() {
   }
 
   return (
-    <div className="grid gap-3">
-      <div className="rounded-xl overflow-hidden border border-neutral-200">
+    <div className="grid gap-4">
+      <div className="rounded-2xl overflow-hidden border border-neutral-200 dark:border-white/10 shadow-sm">
         <div ref={mapElRef} className="h-[420px] w-full" />
       </div>
 
-      <div className="grid gap-2 sm:grid-cols-3">
+      <div className="grid gap-3 sm:grid-cols-3">
         <input
-          className="w-full rounded-lg border border-neutral-300 px-3 py-2"
+          className="w-full rounded-xl border border-neutral-200/80 bg-white/80 px-4 py-2.5 text-neutral-900 shadow-sm placeholder:text-neutral-400 focus:outline-none focus:border-neutral-400 focus:bg-white dark:border-white/15 dark:bg-white/5 dark:text-white dark:shadow-none dark:placeholder:text-white/40 dark:focus:border-white/30 dark:focus:bg-white/10 backdrop-blur transition"
           placeholder="Your name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           maxLength={40}
         />
         <input
-          className="w-full rounded-lg border border-neutral-300 px-3 py-2 sm:col-span-2"
+          className="w-full rounded-xl border border-neutral-200/80 bg-white/80 px-4 py-2.5 sm:col-span-2 text-neutral-900 shadow-sm placeholder:text-neutral-400 focus:outline-none focus:border-neutral-400 focus:bg-white dark:border-white/15 dark:bg-white/5 dark:text-white dark:shadow-none dark:placeholder:text-white/40 dark:focus:border-white/30 dark:focus:bg-white/10 backdrop-blur transition"
           placeholder="Something fun about your hometown"
           value={fact}
           onChange={(e) => setFact(e.target.value)}
@@ -187,20 +187,20 @@ export default function HometownMap() {
         />
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex flex-wrap items-center gap-3">
         <button
-          className="rounded-lg bg-black text-white px-4 py-2 hover:opacity-90"
+          className="rounded-xl bg-neutral-950 px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-neutral-800 dark:bg-white dark:text-black dark:shadow-none dark:hover:bg-white/90 transition cursor-pointer"
           onClick={onPin}
         >
           Pin
         </button>
-        <div className="text-sm text-neutral-600">
+        <div className="text-sm text-neutral-600 dark:text-neutral-400">
           Draft location: {draftLatLng.lat.toFixed(4)}, {draftLatLng.lng.toFixed(4)}
         </div>
       </div>
 
-      {status && <div className="text-sm text-neutral-700">{status}</div>}
-      <div className="text-xs text-neutral-500">
+      {status && <div className="text-sm text-neutral-800 dark:text-neutral-200 font-medium">{status}</div>}
+      <div className="text-xs text-neutral-500 dark:text-neutral-400">
         Tip: drag the marker to your hometown, then click Pin.
       </div>
     </div>

@@ -1,180 +1,701 @@
 ---
 import "../styles/global.css";
-
 import ParallaxBackground from "../components/ParallaxBackground.astro";
+import Header from "../components/Header.astro";
 
 const name = "Paras Goel";
-const tagline = "Under maintenance.";
+
 const links = [
-  { label: "GitHub", href: "https://github.com/" },
-  { label: "LinkedIn", href: "https://linkedin.com/" },
-  { label: "Email", href: "mailto:you@example.com" },
+  { label: "GitHub", href: "https://github.com/parser06" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/parasgoel1/" },
+  { label: "Email", href: "mailto:pg2829@columbia.edu" },
 ];
 
-const projects = [
+const skillCategories = [
   {
-    title: "Project One",
-    desc: "Under maintenance.",
-    href: "#",
-    tags: ["ML", "Systems", "Research"],
+    category: "LANGUAGES",
+    skills: [
+      "Python",
+      "C++",
+      "Java",
+      "C",
+      "TypeScript",
+      "JavaScript",
+      "SQL",
+      "Bash",
+      "MATLAB",
+      "HTML/CSS",
+    ],
   },
   {
-    title: "Project Two",
-    desc: "Under maintenance.",
-    href: "#",
-    tags: ["Robotics", "Infra"],
+    category: "AI & MACHINE LEARNING",
+    skills: [
+      "PyTorch",
+      "Hugging Face (Diffusers, Accelerate)",
+      "CUDA",
+      "LangGraph",
+      "PydanticAI",
+      "LangChain",
+      "MONAI",
+      "Vision Transformers",
+      "Diffusion Models",
+      "Scikit-learn",
+      "TensorFlow / Keras",
+      "Weights & Biases",
+    ],
   },
+  {
+    category: "SYSTEMS & CLOUD",
+    skills: [
+      "Model Context Protocol (MCP)",
+      "Docker",
+      "Azure (AI Foundry, ADX)",
+      "Google Cloud (GCP)",
+      "Redis",
+      "Qdrant (Vector DB)",
+      "Ray",
+      "Slurm",
+      "PostgreSQL",
+      "Supabase",
+      "Grafana",
+      "FFmpeg",
+    ],
+  },
+  {
+    category: "WEB & FRAMEWORKS",
+    skills: [
+      "React",
+      "Next.js",
+      "Astro",
+      "FastAPI",
+      "Node.js",
+      "REST APIs",
+      "OAuth",
+      "Vercel",
+      "Git",
+      "Tailwind CSS",
+      "Postman",
+      "Flask",
+    ],
+  },
+];
+
+const experiences = [
+  {
+    role: "Software Development Intern, Copilot Tuning Team",
+    company: "Microsoft",
+    location: "Redmond, WA",
+    period: "May 2026 – Present",
+    description: [
+      "Developed evaluation and experimentation infrastructure for the Copilot Frontier Tuning (FT) platform, enabling reinforcement learning based optimization of enterprise AI agents and LLMs.",
+      "Built & scaled performance analytics for 1,000+ agents across 250+ FT tenants, used daily by 30+ developers.",
+      "Leveraging Monte Carlo Tree Search to evaluate FT models' reasoning, latency, and token efficiency tradeoffs.",
+      "Developing an autonomous AI agent to orchestrate feature rollout workflows across 33,000+ flights, including tenant onboarding, deployment debugging, & configuration validation.",
+    ],
+    tools: [
+      "Azure Data Explorer",
+      "AI Foundry",
+      "RL World",
+      "O365 Monitoring",
+      "WorkIQ",
+      "Graph API",
+    ],
+  },
+  {
+    role: "ML Researcher",
+    company: "DitecT Lab, Columbia University Engineering",
+    location: "New York, NY",
+    period: "Jan 2026 – Present",
+    description: [
+      "Developing causal inference frameworks for video generation by modeling temporal dependencies and intervention effects, enabling more controllable and interpretable generation dynamics.",
+      "Adapting causal forcing techniques to distill large bidirectional generative models into efficient autoregressive architectures, reducing inference cost while preserving generation quality.",
+      "Analyzing temporal consistency, causal fidelity, and generation efficiency across video synthesis models.",
+    ],
+    tools: [
+      "CUDA",
+      "Hugging Face Diffusers",
+      "Accelerate",
+      "Ray",
+      "Slurm",
+      "FFmpeg",
+      "Hydra",
+      "NumPy",
+    ],
+  },
+  {
+    role: "AI Engineer",
+    company: "Agentic Fabriq (YC F25)",
+    location: "New York, NY",
+    period: "Jan 2026 – May 2026",
+    description: [
+      "Developed OAuth-based authorization workflow for enterprise AI agents, enabling secure access to customer resources while maintaining isolation across agent workflows.",
+      "Designed and deployed MCP servers and tool-integration layers supporting authenticated communication between LLM agents, external services, and internal data systems.",
+    ],
+    tools: [
+      "MCP",
+      "FastAPI",
+      "Redis",
+      "Qdrant",
+      "Google Cloud",
+      "LangGraph",
+      "PydanticAI",
+      "Weights & Biases",
+    ],
+  },
+  {
+    role: "Software Developer",
+    company: "PayPal",
+    location: "San Jose, CA & New York, NY",
+    period: "Jun 2025 – Dec 2025",
+    description: [
+      "Leveraged LLMs to transform unstructured business content into production-ready storefronts, enabling rapid merchant onboarding with generated catalogs & integrated payments (Alpha tested with 100+ customers).",
+      "Developed infrastructure for full-stack system by integrating multimodal image generation models, LLMs, and PayPal SDKs with responsive UIs and scalable cloud deployment on Vercel.",
+      "Created evaluation pipelines for AI models' outputs for catalog creation, pricing, natural language-to-HTML conversion, and price accuracy.",
+    ],
+    tools: [
+      "Next.js",
+      "Node.js",
+      "Vercel",
+      "PostgreSQL",
+      "React",
+      "LangChain",
+      "OAuth",
+      "REST APIs",
+    ],
+  },
+  {
+    role: "AI/ML Researcher",
+    company: "Columbia University Irving Medical Center",
+    location: "New York, NY",
+    period: "May 2024 – Nov 2025",
+    description: [
+      "Implemented 3D attention mechanisms for glioma classification from multimodal MRI scans.",
+      "Built image-to-image deep learning pipeline using latent diffusion model for Region of Interest extraction.",
+    ],
+    tools: [
+      "PyTorch",
+      "Scikit-learn",
+      "TensorFlow/Keras",
+      "Docker",
+      "Vision Transformer",
+      "Pydicom",
+      "Grafana",
+    ],
+  },
+];
+
+const research = [
+  {
+    title:
+      "Utilizing MCP and Shared Introspection for Targeted Agent-to-Agent Communication in Hierarchical Clinical Multi-Agent Systems",
+    conference: "NeurIPS 2025",
+    description:
+      "We developed a hierarchical multi-agent system for clinical decision support, combining five domain-specialist agents with an attending-style meta-agent to coordinate complex medical reasoning. Through structured deliberation and confidence-based conflict resolution, our system improved diagnostic accuracy from 20% to 80% on USMLE-style clinical questions while reducing response time by approximately 28%.",
+    href: "https://neurips.cc/virtual/2025/loc/mexico-city/129950",
+  },
+  {
+    title:
+      "Facilitating Shared Introspection in Hierarchical Multi-Agent Systems Using the Model Context Protocol",
+    conference:
+      "IEEE RAAI (Robotics, Automation, and Artificial Intelligence) 2025",
+    description:
+      "We developed an MCP-enabled multi-agent framework that allows specialized medical AI agents to share and reflect on their reasoning in real time. By coordinating these insights through a supervising agent, we explored how structured introspection and deliberation can make clinical AI more transparent, efficient, and resilient to individual agent errors.",
+    href: "https://ieeexplore.ieee.org/document/11423310",
+  },
+  {
+    title:
+      "Utilizing Multi-Agent Reinforcement Learning with Encoder-Decoder Architecture Agents to Identify Optimal Resection Location in Glioblastoma Multiforme Patients",
+    conference: "AJAS 2025",
+    description:
+      "We developed an end-to-end AI framework for glioblastoma diagnosis and treatment planning, combining sequential classification with generative models that simulate surgical resection, radiotherapy, and chemotherapy outcomes. By integrating these models with reinforcement learning, our system iteratively explores treatment strategies toward a desired survival outcome while substantially reducing diagnostic compute costs and tumor-progression inference time.",
+    href: "https://arxiv.org/abs/2512.06990",
+  },
+  {
+    title:
+      "CoCa-Mil: Attention-Based Handcrafted-Deep Feature Fusion in Computational Pathology",
+    conference:
+      "IEEE ISBI (International Symposium on Biomedical Imaging) 2024",
+    description:
+      "We developed CoCa-MIL, an attention-based framework for whole-slide image classification that combines domain-specific handcrafted features with representations learned by deep neural networks. Using co-attention and cross-attention mechanisms, our approach leverages the complementary strengths of both feature types, improving classification accuracy on the TCGA Lung Cancer dataset by up to 5.21% over baseline methods.",
+    href: "https://ieeexplore.ieee.org/document/10635193",
+  },
+  {
+    title:
+      "CA-fuse-MIL: cross-attention fusion of handcrafted and deep features for whole slide image classification",
+    conference:
+      "IEEE SPIE (Society of Photographic Instrumentation Engineers) 2024",
+    description:
+      "We introduced CA-Fuse-MIL, a cross-attention approach that integrates handcrafted pathology features with deep learned representations for whole-slide image classification. We also explored multi-layer variants of the architecture, showing that explicitly learning interactions between these complementary feature spaces can outperform deep features alone, with accuracy gains of up to 5.21% on the TCGA Lung Cancer dataset.",
+    href: "https://www.spiedigitallibrary.org/conference-proceedings-of-spie/12933/1293306/CA-fuse-MIL--cross-attention-fusion-of-handcrafted-and/10.1117/12.3008533.full",
+  },
+  {
+    title:
+      "Role of stain normalization in computational pathology: use case in metastatic tissue classification",
+    conference:
+      "IEEE SPIE (Society of Photographic Instrumentation Engineers) 2023",
+    description:
+      "We investigated how stain normalization and color augmentation can improve the robustness of deep learning models across variations in histopathology imaging. Evaluating six preprocessing configurations on more than 300,000 tissue images, we found that combining Macenko normalization with color augmentation produced the strongest metastatic tissue classification performance, improving both accuracy and F1 score over the baseline.",
+    href: "https://www.spiedigitallibrary.org/conference-proceedings-of-spie/12471/124711J/Role-of-stain-normalization-in-computational-pathology--use-case/10.1117/12.2654094.full",
+  },
+];
+
+const coursework = [
+  "Machine Learning",
+  "Artificial Intelligence",
+  "Natural Language Processing",
+  "Computer Vision",
+  "Analysis of Algorithms",
+  "Data Structures",
+  "Advanced Programming",
+  "Operating Systems",
+  "Databases",
+  "Security",
+  "CS Theory",
+  "Discrete Mathematics",
+];
+
+const organizations = [
+  { name: "Columbia Space Initiative", role: "CubeSat Team" },
+  { name: "CU Airplane Club", role: "Electrical Subteam" },
+  { name: "Engineering Recruitment Council", role: "Undergraduate Tour Guide" },
+  { name: "CU Science Olympiad", role: "Event Supervisor" },
 ];
 ---
 
-<html lang="en">
+<html lang="en" class="dark">
   <head>
+    <script is:inline>
+      const savedTheme = localStorage.getItem("theme");
+
+      if (savedTheme === "light") {
+        document.documentElement.classList.remove("dark");
+      } else {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <title>{name}</title>
   </head>
 
-  <body class="min-h-screen bg-black text-white selection:bg-white/20">
-    <!-- Background: neon radials + subtle grid -->
-	<!-- Depreciated background
-    <div class="fixed inset-0 -z-10">
-      <div
-        class="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(99,102,241,0.35),transparent_38%),radial-gradient(circle_at_85%_25%,rgba(34,211,238,0.22),transparent_45%),radial-gradient(circle_at_50%_85%,rgba(236,72,153,0.18),transparent_52%)]"
-      />
-      <div
-        class="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:48px_48px] opacity-20"
-      />
-      <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-black to-black" />
-    </div>
-	-->
+  <body
+    class="min-h-screen bg-slate-50 text-slate-900 selection:bg-neutral-900/10 dark:bg-black dark:text-white dark:selection:bg-white/20 transition-colors duration-200"
+  >
+    <ParallaxBackground />
 
-	<ParallaxBackground />
+    <main class="relative z-10 mx-auto max-w-6xl px-6 py-14">
+      <!-- Header -->
+      <Header />
 
-    <main class="mx-auto max-w-5xl px-6 py-14">
-      <!-- Top bar -->
-      <header class="flex items-center justify-between">
-        <div class="text-xs tracking-[0.3em] text-white/60">
-          SYSTEM // PORTFOLIO
-        </div>
-
-        <nav class="hidden sm:flex items-center gap-7 text-sm text-white/70">
-          <a class="hover:text-white" href="#projects">Projects</a>
-          <a class="hover:text-white" href="#about">About</a>
-          <a class="hover:text-white" href="#contact">Contact</a>
-          <a class="hover:text-white" href="/tv-ratings">TV Ratings</a>
-        </nav>
-      </header>
-
-      <!-- Hero -->
-      <section class="mt-20">
+      <!-- Intro / Hero -->
+      <section class="mt-24 max-w-3xl">
         <div
-          class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-white/70 backdrop-blur"
+          class="text-xs tracking-[0.3em] text-neutral-400 dark:text-white/45"
         >
-          <span class="h-2 w-2 rounded-full bg-white/60"></span>
-          Local preview — not deployed
+          PROFILE //
         </div>
 
-        <h1 class="mt-6 text-5xl font-semibold leading-tight">
-          {name}
-          <span class="block text-white/55">Under maintenance</span>
+        <h1
+          class="mt-4 text-5xl font-semibold tracking-tight text-neutral-950 dark:text-white"
+        >
+          Paras Goel
         </h1>
 
-        <p class="mt-6 max-w-2xl text-lg text-white/70">
-          {tagline}. Under maintenance.
+        <p class="mt-6 text-lg leading-8 text-neutral-600 dark:text-white/65">
+          I'm a computer science and applied mathematics student at Columbia
+          University interested in building intelligent systems at the
+          intersection of AI agents, generative models, and systems engineering.
+          Currently working on Copilot Frontier Tuning at Microsoft and video
+          generation at DitecT Lab.
         </p>
 
-        <div class="mt-7 flex flex-wrap gap-3">
-          <a
-            href="#projects"
-            class="rounded-xl bg-white px-5 py-3 text-sm font-medium text-black hover:bg-white/90"
-          >
-            View projects
-          </a>
-          <a
-            href="#contact"
-            class="rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-medium text-white hover:bg-white/10 backdrop-blur"
-          >
-            Contact
-          </a>
-          {links.map((l) => (
-            <a
-              href={l.href}
-              class="rounded-xl border border-white/10 bg-white/0 px-5 py-3 text-sm text-white/70 hover:bg-white/5 hover:text-white transition"
-              target={l.href.startsWith("http") ? "_blank" : undefined}
-              rel={l.href.startsWith("http") ? "noreferrer" : undefined}
+        <!-- Social / Contact Links -->
+        <div class="mt-8 flex flex-wrap gap-3">
+          {
+            links.map((l) => (
+              <a
+                href={l.href}
+                class="inline-flex items-center gap-2 rounded-xl border border-neutral-200/80 bg-white/70 px-4 py-2.5 text-sm font-medium text-neutral-800 shadow-sm hover:border-neutral-300 hover:bg-white hover:text-neutral-950 dark:border-white/10 dark:bg-white/[0.05] dark:text-white/80 dark:shadow-none dark:hover:border-white/20 dark:hover:bg-white/10 dark:hover:text-white backdrop-blur transition"
+                target={l.href.startsWith("http") ? "_blank" : undefined}
+                rel={l.href.startsWith("http") ? "noreferrer" : undefined}
+              >
+                <span>{l.label}</span>
+                <span class="text-neutral-400 dark:text-white/40">↗</span>
+              </a>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Technical Stack & Skills -->
+      <section class="mt-24">
+        <div class="mb-8 flex items-end justify-between">
+          <div>
+            <div
+              class="text-xs tracking-[0.3em] text-neutral-400 dark:text-white/45"
             >
-              {l.label} ↗
-            </a>
-          ))}
+              TECHNICAL // STACK & SKILLS
+            </div>
+            <h2
+              class="mt-2 text-3xl font-semibold text-neutral-950 dark:text-white"
+            >
+              What I Work With
+            </h2>
+          </div>
         </div>
 
-        <div class="mt-10 grid gap-4 sm:grid-cols-3">
-          {["Under maintenance", "Under maintenance.", "Under maintenance."].map((x) => (
-            <div class="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
-              <div class="text-xs tracking-[0.25em] text-white/55">MODULE</div>
-              <div class="mt-2 text-xl font-medium">{x}</div>
-              <div class="mt-2 text-sm text-white/60">
-                Under maintenance.
+        <div class="grid gap-6 md:grid-cols-2">
+          {
+            skillCategories.map((cat) => (
+              <div class="rounded-3xl border border-neutral-200/80 bg-white/70 p-7 backdrop-blur shadow-sm dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none transition hover:border-neutral-300 dark:hover:border-white/20">
+                <div class="text-xs tracking-[0.25em] text-neutral-400 dark:text-white/40">
+                  {cat.category}
+                </div>
+
+                <div class="mt-6 flex flex-wrap gap-2.5">
+                  {cat.skills.map((skill) => (
+                    <span class="rounded-full border border-neutral-200 bg-neutral-100/90 px-3.5 py-1.5 text-xs text-neutral-700 font-medium transition hover:border-neutral-300 hover:bg-neutral-200 hover:text-neutral-950 dark:border-white/10 dark:bg-white/[0.05] dark:text-white/75 dark:hover:border-white/25 dark:hover:bg-white/10 dark:hover:text-white">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Experience -->
+      <section class="mt-24">
+        <button
+          type="button"
+          id="experience-toggle"
+          class="flex w-full items-center justify-between text-left group cursor-pointer"
+          aria-expanded="true"
+          aria-controls="experience-content"
+        >
+          <div>
+            <div
+              class="text-xs tracking-[0.3em] text-neutral-400 dark:text-white/45"
+            >
+              EXPERIENCE // WORK & RESEARCH
+            </div>
+            <h2
+              class="mt-2 text-3xl font-semibold text-neutral-950 dark:text-white"
+            >
+              Experience
+            </h2>
+          </div>
+
+          <div
+            class="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200/80 bg-white/70 text-neutral-700 shadow-sm backdrop-blur transition-all duration-300 group-hover:border-neutral-300 group-hover:bg-white group-hover:text-neutral-950 dark:border-white/10 dark:bg-white/[0.05] dark:text-white/70 dark:shadow-none dark:group-hover:border-white/20 dark:group-hover:bg-white/10 dark:group-hover:text-white"
+          >
+            <svg
+              id="experience-arrow"
+              class="h-5 w-5 transition-transform duration-300 rotate-180"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+        </button>
+
+        <div id="experience-content" class="mt-8 space-y-6">
+          {
+            experiences.map((exp, index) => (
+              <div class="rounded-3xl border border-neutral-200/80 bg-white/70 p-7 sm:p-8 backdrop-blur shadow-sm dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none">
+                <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                  <div>
+                    <h3 class="text-xl font-semibold text-neutral-950 dark:text-white">
+                      {exp.role}
+                    </h3>
+                    <div class="text-sm font-medium text-neutral-600 dark:text-white/70 mt-0.5">
+                      {exp.company}{" "}
+                      <span class="text-neutral-400 dark:text-white/30">•</span>{" "}
+                      {exp.location}
+                    </div>
+                  </div>
+
+                  <div class="text-xs tracking-wider text-neutral-400 dark:text-white/45 sm:text-right font-medium">
+                    {exp.period}
+                  </div>
+                </div>
+
+                <ul class="mt-5 space-y-2 text-sm leading-6 text-neutral-600 dark:text-white/60">
+                  {exp.description.map((bullet) => (
+                    <li class="flex items-start gap-2.5">
+                      <span class="text-neutral-400 dark:text-white/30 mt-1">
+                        ▹
+                      </span>
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {exp.tools && exp.tools.length > 0 && (
+                  <div class="mt-5 flex flex-wrap gap-2 pt-4 border-t border-neutral-200/60 dark:border-white/[0.06]">
+                    {exp.tools.map((t) => (
+                      <span class="rounded-md border border-neutral-200/80 bg-neutral-100/70 px-2.5 py-1 text-[11px] text-neutral-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-white/60">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Publications & Research -->
+      <section class="mt-24">
+        <button
+          type="button"
+          id="publications-toggle"
+          class="flex w-full items-center justify-between text-left group cursor-pointer"
+          aria-expanded="true"
+          aria-controls="publications-content"
+        >
+          <div>
+            <div
+              class="text-xs tracking-[0.3em] text-neutral-400 dark:text-white/45"
+            >
+              PUBLICATIONS // SELECTED
+            </div>
+            <h2
+              class="mt-2 text-3xl font-semibold text-neutral-950 dark:text-white"
+            >
+              Research
+            </h2>
+          </div>
+
+          <div
+            class="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200/80 bg-white/70 text-neutral-700 shadow-sm backdrop-blur transition-all duration-300 group-hover:border-neutral-300 group-hover:bg-white group-hover:text-neutral-950 dark:border-white/10 dark:bg-white/[0.05] dark:text-white/70 dark:shadow-none dark:group-hover:border-white/20 dark:group-hover:bg-white/10 dark:group-hover:text-white"
+          >
+            <svg
+              id="publications-arrow"
+              class="h-5 w-5 transition-transform duration-300 rotate-180"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+        </button>
+
+        <div id="publications-content" class="mt-8 space-y-5">
+          {
+            research.map((item, index) => (
+              <a
+                href={item.href}
+                class="group block rounded-3xl border border-neutral-200/80 bg-white/70 p-7 backdrop-blur shadow-sm transition hover:border-neutral-300 hover:bg-white hover:shadow-md dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none dark:hover:border-white/20 dark:hover:bg-white/[0.07]"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div class="flex gap-6">
+                  <div class="hidden text-sm text-neutral-400 dark:text-white/30 sm:block">
+                    0{index + 1}
+                  </div>
+
+                  <div class="flex-1">
+                    <div class="flex items-start justify-between gap-6">
+                      <div>
+                        <div class="text-sm tracking-[0.05em] text-neutral-500 dark:text-white/40 font-medium">
+                          {item.conference}
+                        </div>
+
+                        <h3 class="mt-2 text-xl font-medium text-neutral-900 group-hover:text-neutral-950 dark:text-white dark:group-hover:text-white">
+                          {item.title}
+                        </h3>
+                      </div>
+
+                      <span class="text-neutral-400 transition group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-neutral-950 dark:text-white/30 dark:group-hover:text-white">
+                        ↗
+                      </span>
+                    </div>
+
+                    <p class="mt-4 max-w-3xl leading-7 text-neutral-600 dark:text-white/55">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Education & Involvements -->
+      <section class="mt-24">
+        <div>
+          <div
+            class="text-xs tracking-[0.3em] text-neutral-400 dark:text-white/45"
+          >
+            BACKGROUND // EDUCATION & LEADERSHIP
+          </div>
+          <h2
+            class="mt-2 text-3xl font-semibold text-neutral-950 dark:text-white"
+          >
+            Education & Involvements
+          </h2>
+        </div>
+
+        <div class="mt-8 grid gap-6 md:grid-cols-2">
+          <!-- Education Card -->
+          <div
+            class="rounded-3xl border border-neutral-200/80 bg-white/70 p-7 backdrop-blur shadow-sm dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none"
+          >
+            <div
+              class="text-xs tracking-[0.25em] text-neutral-400 dark:text-white/40"
+            >
+              EDUCATION
+            </div>
+
+            <div class="mt-4">
+              <h3
+                class="text-xl font-semibold text-neutral-950 dark:text-white"
+              >
+                Columbia University
+              </h3>
+              <div class="text-sm text-neutral-600 dark:text-white/70 mt-1">
+                Fu Foundation School of Engineering and Applied Science
+              </div>
+              <div
+                class="text-sm font-medium text-neutral-900 dark:text-white/90 mt-2"
+              >
+                B.S. in Computer Science & Applied Mathematics
+              </div>
+              <div class="text-xs text-neutral-500 dark:text-white/50 mt-1">
+                Minor in Statistics • 3.81 GPA • Dean's List (Expected 2028)
               </div>
             </div>
-          ))}
-        </div>
-      </section>
 
-      <!-- Projects -->
-      <section id="projects" class="mt-24">
-        <div class="flex items-end justify-between gap-4">
-          <h2 class="text-2xl font-semibold">Projects</h2>
-          <div class="text-sm text-white/60">Selected work</div>
-        </div>
+            <div class="mt-6">
+              <div
+                class="text-xs font-semibold tracking-wider text-neutral-500 dark:text-white/45"
+              >
+                SELECTED COURSEWORK
+              </div>
+              <div class="mt-3 flex flex-wrap gap-2">
+                {
+                  coursework.map((course) => (
+                    <span class="rounded-full border border-neutral-200 bg-neutral-100/90 px-3 py-1 text-xs text-neutral-700 dark:border-white/10 dark:bg-white/[0.05] dark:text-white/70">
+                      {course}
+                    </span>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
 
-        <div class="mt-6 grid gap-6 sm:grid-cols-2">
-          {projects.map((p) => (
-            <a
-              href={p.href}
-              class="group rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur hover:bg-white/10 transition"
+          <!-- Organizations / Involvements Card -->
+          <div
+            class="rounded-3xl border border-neutral-200/80 bg-white/70 p-7 backdrop-blur shadow-sm dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none flex flex-col justify-between"
+          >
+            <div>
+              <div
+                class="text-xs tracking-[0.25em] text-neutral-400 dark:text-white/40"
+              >
+                ORGANIZATIONS & ACTIVITIES
+              </div>
+
+              <div class="mt-6 space-y-4">
+                {
+                  organizations.map((org) => (
+                    <div class="flex items-center justify-between border-b border-neutral-200/60 pb-3 dark:border-white/[0.06] last:border-0 last:pb-0">
+                      <span class="text-sm font-medium text-neutral-900 dark:text-white">
+                        {org.name}
+                      </span>
+                      <span class="text-xs text-neutral-500 dark:text-white/50">
+                        {org.role}
+                      </span>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+
+            <div
+              class="mt-6 rounded-2xl border border-neutral-200/60 bg-white/50 p-4 dark:border-white/[0.06] dark:bg-white/[0.02]"
             >
-              <div class="flex items-center justify-between">
-                <div class="text-lg font-medium">{p.title}</div>
-                <div class="text-white/50 group-hover:text-white/80">↗</div>
+              <div
+                class="text-xs tracking-[0.2em] text-neutral-400 dark:text-white/40"
+              >
+                CURRENT FOCUS
               </div>
-              <div class="mt-2 text-sm text-white/60">{p.desc}</div>
-              <div class="mt-4 flex flex-wrap gap-2">
-                {p.tags.map((t) => (
-                  <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </a>
-          ))}
+              <p
+                class="mt-2 text-xs leading-5 text-neutral-600 dark:text-white/60"
+              >
+                Generative models, multi-agent reasoning, causal inference, and
+                building production-scale AI architectures.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- About -->
-      <section id="about" class="mt-24">
-        <h2 class="text-2xl font-semibold">About</h2>
-        <div class="mt-6 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-          <p class="text-white/70">
-            Under maintenance.
-          </p>
-        </div>
-      </section>
-
-      <!-- Contact -->
-      <section id="contact" class="mt-24 mb-10">
-        <h2 class="text-2xl font-semibold">Contact</h2>
-        <div class="mt-6 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-          <p class="text-white/70">
-            Under maintenance.
-          </p>
-        </div>
-      </section>
-
-      <footer class="mt-10 border-t border-white/10 pt-8 text-sm text-white/50">
-        © {new Date().getFullYear()} {name}. Built with Astro + Tailwind.
+      <footer
+        class="mt-24 border-t border-neutral-200 py-8 text-sm text-neutral-500 dark:border-white/10 dark:text-white/35"
+      >
+        © {new Date().getFullYear()} Paras Goel
       </footer>
     </main>
+
+    <script>
+      function setupCollapsible(
+        btnId: string,
+        contentId: string,
+        arrowId: string,
+        defaultOpen = true,
+      ) {
+        const btn = document.getElementById(btnId);
+        const content = document.getElementById(contentId);
+        const arrow = document.getElementById(arrowId);
+        if (!btn || !content || !arrow) return;
+
+        let isOpen = defaultOpen;
+
+        const updateState = (open: boolean) => {
+          isOpen = open;
+          btn.setAttribute("aria-expanded", String(isOpen));
+          if (isOpen) {
+            content.classList.remove("hidden");
+            arrow.classList.add("rotate-180");
+          } else {
+            content.classList.add("hidden");
+            arrow.classList.remove("rotate-180");
+          }
+        };
+
+        btn.addEventListener("click", () => {
+          updateState(!isOpen);
+        });
+      }
+
+      setupCollapsible(
+        "experience-toggle",
+        "experience-content",
+        "experience-arrow",
+        true,
+      );
+      setupCollapsible(
+        "publications-toggle",
+        "publications-content",
+        "publications-arrow",
+        true,
+      );
+    </script>
   </body>
 </html>

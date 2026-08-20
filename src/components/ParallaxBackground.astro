@@ -60,13 +60,23 @@
 
     ctx.clearRect(0, 0, w, h);
 
-    // Subtle background glow that also follows the "camera"
+    const isDark = document.documentElement.classList.contains("dark");
+
+    // Background glow that follows camera
     const gx = w * (0.5 + cam.x * 0.18);
     const gy = h * (0.5 + cam.y * 0.18);
     const grad = ctx.createRadialGradient(gx, gy, 0, gx, gy, Math.max(w, h) * 0.7);
-    grad.addColorStop(0, "rgba(99,102,241,0.20)");
-    grad.addColorStop(0.35, "rgba(34,211,238,0.12)");
-    grad.addColorStop(1, "rgba(0,0,0,0)");
+
+    if (isDark) {
+      grad.addColorStop(0, "rgba(99,102,241,0.20)");
+      grad.addColorStop(0.35, "rgba(34,211,238,0.12)");
+      grad.addColorStop(1, "rgba(0,0,0,0)");
+    } else {
+      grad.addColorStop(0, "rgba(99,102,241,0.08)");
+      grad.addColorStop(0.35, "rgba(56,189,248,0.06)");
+      grad.addColorStop(1, "rgba(248,250,252,0)");
+    }
+
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, w, h);
 
@@ -89,12 +99,13 @@
 
       ctx.beginPath();
       ctx.arc(p.x + ox, p.y + oy, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255,255,255,${0.10 + 0.25 * p.z})`;
+      ctx.fillStyle = isDark
+        ? `rgba(255,255,255,${0.10 + 0.25 * p.z})`
+        : `rgba(15,23,42,${0.08 + 0.18 * p.z})`;
       ctx.fill();
     }
 
-    // Optional: faint connecting lines (adds “field” feel)
-    // keep it light: only connect close neighbors
+    // Faint connecting lines
     for (let i = 0; i < particles.length; i++) {
       const a = particles[i];
       for (let j = i + 1; j < particles.length; j++) {
@@ -103,7 +114,9 @@
         const dist2 = dx*dx + dy*dy;
         if (dist2 < 140*140) {
           const t = 1 - Math.sqrt(dist2) / 140;
-          ctx.strokeStyle = `rgba(255,255,255,${0.06 * t})`;
+          ctx.strokeStyle = isDark
+            ? `rgba(255,255,255,${0.06 * t})`
+            : `rgba(15,23,42,${0.04 * t})`;
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(a.x + cam.x * 60 * (0.5 + a.z * 1.6), a.y + cam.y * 60 * (0.5 + a.z * 1.6));

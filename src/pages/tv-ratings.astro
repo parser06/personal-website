@@ -1,49 +1,46 @@
 ---
 import "../styles/global.css";
+import ParallaxBackground from "../components/ParallaxBackground.astro";
+import Header from "../components/Header.astro";
 
 const name = "Paras Goel";
 ---
 
-<html lang="en">
+<html lang="en" class="dark">
   <head>
+    <script is:inline>
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "light") {
+        document.documentElement.classList.remove("dark");
+      } else {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <title>TV Show Ratings | {name}</title>
   </head>
 
-  <body class="min-h-screen bg-black text-white selection:bg-white/20">
-    <!-- Background: neon radials + subtle grid -->
-    <div class="fixed inset-0 -z-10">
-      <div
-        class="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(99,102,241,0.35),transparent_38%),radial-gradient(circle_at_85%_25%,rgba(34,211,238,0.22),transparent_45%),radial-gradient(circle_at_50%_85%,rgba(236,72,153,0.18),transparent_52%)]"
-      />
-      <div
-        class="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:48px_48px] opacity-20"
-      />
-      <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-black to-black" />
-    </div>
+  <body class="min-h-screen bg-slate-50 text-slate-900 selection:bg-neutral-900/10 dark:bg-black dark:text-white dark:selection:bg-white/20 transition-colors duration-200">
+    <ParallaxBackground />
 
-    <main class="mx-auto max-w-5xl px-6 py-14">
-      <!-- Top bar -->
-      <header class="flex items-center justify-between">
-        <a href="/" class="text-xs tracking-[0.3em] text-white/60 hover:text-white/80 transition">
-          ← BACK TO PORTFOLIO
-        </a>
-      </header>
+    <main class="relative z-10 mx-auto max-w-6xl px-6 py-14">
+      <!-- Navigation -->
+      <Header />
 
       <!-- Hero -->
-      <section class="mt-16">
+      <section class="mt-24">
         <div
-          class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-white/70 backdrop-blur"
+          class="inline-flex items-center gap-2 rounded-full border border-neutral-200/80 bg-white/80 px-4 py-2 text-xs text-neutral-700 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/5 dark:text-white/70 dark:shadow-none"
         >
-          <span class="h-2 w-2 rounded-full bg-yellow-400"></span>
+          <span class="h-2 w-2 rounded-full bg-yellow-500"></span>
           IMDB Ratings via OMDb API
         </div>
 
-        <h1 class="mt-6 text-4xl font-semibold leading-tight">
+        <h1 class="mt-6 text-4xl font-semibold leading-tight text-neutral-950 dark:text-white">
           TV Show Ratings
-          <span class="block text-white/55">Search any show, get IMDB scores</span>
+          <span class="block text-neutral-500 dark:text-white/55">Search any show, get IMDB scores</span>
         </h1>
 
         <!-- Search Box -->
@@ -52,31 +49,31 @@ const name = "Paras Goel";
             type="text"
             id="search-input"
             placeholder="Search for a TV show..."
-            class="w-full rounded-2xl border border-white/15 bg-white/5 px-6 py-4 text-lg text-white placeholder:text-white/40 focus:outline-none focus:border-white/30 focus:bg-white/10 backdrop-blur transition"
+            class="w-full rounded-2xl border border-neutral-200/80 bg-white/80 px-6 py-4 text-lg text-neutral-900 shadow-sm placeholder:text-neutral-400 focus:outline-none focus:border-neutral-400 focus:bg-white dark:border-white/15 dark:bg-white/5 dark:text-white dark:shadow-none dark:placeholder:text-white/40 dark:focus:border-white/30 dark:focus:bg-white/10 backdrop-blur transition"
           />
           <button
             id="search-btn"
-            class="absolute right-2 top-1/2 -translate-y-1/2 rounded-xl bg-white px-5 py-2.5 text-sm font-medium text-black hover:bg-white/90 transition"
+            class="absolute right-2 top-1/2 -translate-y-1/2 rounded-xl bg-neutral-950 px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-neutral-800 dark:bg-white dark:text-black dark:shadow-none dark:hover:bg-white/90 transition cursor-pointer"
           >
             Search
           </button>
         </div>
 
         <!-- API Key Notice -->
-        <div id="api-key-notice" class="mt-4 rounded-xl border border-yellow-500/30 bg-yellow-500/10 p-4 text-sm text-yellow-200/80">
+        <div id="api-key-notice" class="mt-4 rounded-xl border border-yellow-500/30 bg-yellow-500/10 p-4 text-sm text-yellow-800 dark:text-yellow-200/80">
           ⚠️ <strong>Setup required:</strong> Add your OMDb API key in the script below. Get a free key at 
-          <a href="http://www.omdbapi.com/apikey.aspx" target="_blank" class="underline hover:text-yellow-200">omdbapi.com</a>
+          <a href="http://www.omdbapi.com/apikey.aspx" target="_blank" class="underline hover:text-yellow-900 dark:hover:text-yellow-200">omdbapi.com</a>
         </div>
 
         <!-- Loading State -->
         <div id="loading" class="hidden mt-8 text-center">
-          <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-white/20 border-t-white"></div>
-          <p class="mt-2 text-white/60">Searching...</p>
+          <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-neutral-300 border-t-neutral-800 dark:border-white/20 dark:border-t-white"></div>
+          <p class="mt-2 text-neutral-600 dark:text-white/60">Searching...</p>
         </div>
 
         <!-- Error State -->
         <div id="error" class="hidden mt-8 rounded-2xl border border-red-500/30 bg-red-500/10 p-6 text-center">
-          <p class="text-red-200" id="error-message">Something went wrong</p>
+          <p class="text-red-700 dark:text-red-200" id="error-message">Something went wrong</p>
         </div>
 
         <!-- Results Container -->
@@ -90,8 +87,8 @@ const name = "Paras Goel";
         </div>
       </section>
 
-      <footer class="mt-20 border-t border-white/10 pt-8 text-sm text-white/50">
-        Data provided by <a href="http://www.omdbapi.com/" target="_blank" class="underline hover:text-white/70">OMDb API</a>. 
+      <footer class="mt-20 border-t border-neutral-200 pt-8 text-sm text-neutral-500 dark:border-white/10 dark:text-white/50">
+        Data provided by <a href="http://www.omdbapi.com/" target="_blank" class="underline hover:text-neutral-800 dark:hover:text-white/70">OMDb API</a>. 
         IMDB ratings are property of IMDb.com, Inc.
       </footer>
     </main>
@@ -179,7 +176,7 @@ const name = "Paras Goel";
             (show) => `
           <button
             onclick="getShowDetails('${show.imdbID}')"
-            class="group text-left rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur hover:bg-white/10 transition cursor-pointer"
+            class="group text-left rounded-2xl border border-neutral-200/80 bg-white/70 p-4 backdrop-blur shadow-sm hover:border-neutral-300 hover:bg-white hover:shadow-md dark:border-white/10 dark:bg-white/5 dark:shadow-none dark:hover:bg-white/10 transition cursor-pointer"
           >
             <div class="flex gap-4">
               <img
@@ -189,9 +186,9 @@ const name = "Paras Goel";
                 onerror="this.onerror=null; this.src='/image_not_load.png';"
               />
               <div class="flex-1 min-w-0">
-                <div class="font-medium text-white group-hover:text-white/90 truncate">${show.Title}</div>
-                <div class="text-sm text-white/50 mt-1">${show.Year}</div>
-                <div class="mt-2 text-xs text-white/40">Click for rating →</div>
+                <div class="font-medium text-neutral-900 group-hover:text-neutral-950 dark:text-white dark:group-hover:text-white/90 truncate">${show.Title}</div>
+                <div class="text-sm text-neutral-500 dark:text-white/50 mt-1">${show.Year}</div>
+                <div class="mt-2 text-xs text-neutral-400 dark:text-white/40">Click for rating →</div>
               </div>
             </div>
           </button>
@@ -230,10 +227,10 @@ const name = "Paras Goel";
 
         showDetailEl.classList.remove("hidden");
         showDetailEl.innerHTML = `
-          <div class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+          <div class="rounded-2xl border border-neutral-200/80 bg-white/80 p-6 backdrop-blur shadow-md dark:border-white/10 dark:bg-white/5 dark:shadow-none">
             <button
               onclick="document.getElementById('show-detail')?.classList.add('hidden')"
-              class="text-sm text-white/50 hover:text-white mb-4 transition"
+              class="text-sm text-neutral-500 hover:text-neutral-950 dark:text-white/50 dark:hover:text-white mb-4 transition cursor-pointer"
             >
               ← Back to results
             </button>
@@ -242,22 +239,22 @@ const name = "Paras Goel";
               <img
                 src="${show.Poster !== "N/A" ? show.Poster : "/image_not_load.png"}"
                 alt="${show.Title}"
-                class="w-40 h-60 object-cover rounded-xl flex-shrink-0 mx-auto sm:mx-0"
+                class="w-40 h-60 object-cover rounded-xl flex-shrink-0 mx-auto sm:mx-0 shadow-sm"
                 onerror="this.onerror=null; this.src='/image_not_load.png';"
               />
               
               <div class="flex-1">
-                <h2 class="text-2xl font-semibold">${show.Title}</h2>
-                <div class="text-white/50 mt-1">${show.Year} • ${show.totalSeasons ? show.totalSeasons + " Seasons" : "TV Series"}</div>
+                <h2 class="text-2xl font-semibold text-neutral-900 dark:text-white">${show.Title}</h2>
+                <div class="text-neutral-500 dark:text-white/50 mt-1">${show.Year} • ${show.totalSeasons ? show.totalSeasons + " Seasons" : "TV Series"}</div>
                 
                 <!-- IMDB Rating - The main attraction! -->
-                <div class="mt-4 inline-flex items-center gap-3 rounded-xl border border-yellow-500/30 bg-yellow-500/10 px-4 py-3">
-                  <svg class="w-8 h-8 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                <div class="mt-4 inline-flex items-center gap-3 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3">
+                  <svg class="w-8 h-8 text-amber-500" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                   </svg>
                   <div>
-                    <div class="text-2xl font-bold text-yellow-400">${show.imdbRating !== "N/A" ? show.imdbRating : "N/A"}<span class="text-lg text-yellow-400/60">/10</span></div>
-                    <div class="text-xs text-white/50">${show.imdbVotes !== "N/A" ? show.imdbVotes + " votes" : "IMDB Rating"}</div>
+                    <div class="text-2xl font-bold text-amber-600 dark:text-yellow-400">${show.imdbRating !== "N/A" ? show.imdbRating : "N/A"}<span class="text-lg text-amber-600/70 dark:text-yellow-400/60">/10</span></div>
+                    <div class="text-xs text-neutral-600 dark:text-white/50">${show.imdbVotes !== "N/A" ? show.imdbVotes + " votes" : "IMDB Rating"}</div>
                   </div>
                 </div>
                 
@@ -265,7 +262,7 @@ const name = "Paras Goel";
                 ${show.Ratings && show.Ratings.length > 1 ? `
                   <div class="mt-3 flex flex-wrap gap-2">
                     ${show.Ratings.filter((r: any) => r.Source !== "Internet Movie Database").map((r: any) => `
-                      <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
+                      <span class="rounded-full border border-neutral-200 bg-neutral-100/90 px-3 py-1 text-xs text-neutral-700 dark:border-white/10 dark:bg-white/5 dark:text-white/70">
                         ${r.Source}: ${r.Value}
                       </span>
                     `).join("")}
@@ -274,22 +271,22 @@ const name = "Paras Goel";
                 
                 <div class="mt-4 flex flex-wrap gap-2">
                   ${show.Genre ? show.Genre.split(", ").map((g: string) => `
-                    <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">${g}</span>
+                    <span class="rounded-full border border-neutral-200 bg-neutral-100/90 px-3 py-1 text-xs text-neutral-700 dark:border-white/10 dark:bg-white/5 dark:text-white/70">${g}</span>
                   `).join("") : ""}
                 </div>
                 
-                <p class="mt-4 text-sm text-white/70 leading-relaxed">${show.Plot !== "N/A" ? show.Plot : "No plot summary available."}</p>
+                <p class="mt-4 text-sm text-neutral-700 dark:text-white/70 leading-relaxed">${show.Plot !== "N/A" ? show.Plot : "No plot summary available."}</p>
                 
-                <div class="mt-4 text-sm text-white/50">
-                  ${show.Actors !== "N/A" ? `<div><strong class="text-white/70">Cast:</strong> ${show.Actors}</div>` : ""}
-                  ${show.Director !== "N/A" ? `<div class="mt-1"><strong class="text-white/70">Director:</strong> ${show.Director}</div>` : ""}
+                <div class="mt-4 text-sm text-neutral-600 dark:text-white/50">
+                  ${show.Actors !== "N/A" ? `<div><strong class="text-neutral-900 dark:text-white/70">Cast:</strong> ${show.Actors}</div>` : ""}
+                  ${show.Director !== "N/A" ? `<div class="mt-1"><strong class="text-neutral-900 dark:text-white/70">Director:</strong> ${show.Director}</div>` : ""}
                 </div>
                 
                 <a
                   href="https://www.imdb.com/title/${show.imdbID}/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="inline-flex items-center gap-2 mt-4 text-sm text-yellow-400 hover:text-yellow-300 transition"
+                  class="inline-flex items-center gap-2 mt-4 text-sm font-medium text-amber-600 hover:text-amber-700 dark:text-yellow-400 dark:hover:text-yellow-300 transition"
                 >
                   View on IMDB ↗
                 </a>
